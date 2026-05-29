@@ -1,11 +1,14 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
-import { createClient } from '@supabase/supabase-js'
+import { onMounted } from 'vue'
+import { supabase } from '../lib/supabase'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+onMounted(async () => {
+  const { data, error } = await supabase
+    .from('test')
+    .select('*')
 
-export const supabase = createClient(supabaseUrl, supabaseKey)
+  console.log(data, error)
+})
 </script>
 
 <template>
